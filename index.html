@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CPU Scheduling Simulator</h1>
+        
+        <div class="input-section">
+            <div class="algorithm-selection">
+                <label for="algorithm">Select Algorithm:</label>
+                <select id="algorithm">
+                    <option value="fcfs">First Come First Serve (FCFS)</option>
+                    <option value="sjf">Shortest Job First (SJF)</option>
+                    <option value="priority">Priority Scheduling</option>
+                    <option value="rr">Round Robin</option>
+                </select>
+                <div id="quantum-input" style="display: none;">
+                    <label for="time-quantum">Time Quantum:</label>
+                    <input type="number" id="time-quantum" min="1" value="2">
+                </div>
+            </div>
+
+            <div class="process-input">
+                <h3>Add Process</h3>
+                <div class="input-group">
+                    <input type="text" id="process-id" placeholder="Process ID">
+                    <input type="number" id="arrival-time" placeholder="Arrival Time">
+                    <input type="number" id="burst-time" placeholder="Burst Time">
+                    <input type="number" id="priority" placeholder="Priority">
+                    <button onclick="addProcess()">Add Process</button>
+                </div>
+            </div>
+
+            <table id="process-table">
+                <thead>
+                    <tr>
+                        <th>Process ID</th>
+                        <th>Arrival Time</th>
+                        <th>Burst Time</th>
+                        <th>Priority</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="process-list">
+                </tbody>
+            </table>
+
+            <button id="simulate" onclick="simulate()">Simulate</button>
+        </div>
+
+        <div class="output-section">
+            <div class="gantt-chart">
+                <h3>Gantt Chart</h3>
+                <div id="gantt-container"></div>
+                <div id="timeline"></div>
+            </div>
+
+            <div class="results">
+                <h3>Results</h3>
+                <p>Average Waiting Time: <span id="avg-waiting-time">0</span> ms</p>
+                <p>Average Turnaround Time: <span id="avg-turnaround-time">0</span> ms</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
