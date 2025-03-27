@@ -3,67 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPU SchedulinG Simulator</title>
+    <title>CPU Scheduling Simulator</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>CPU Scheduling Simulator</h1>
+        <header class="header">
+            <h1>CPU Scheduling Simulator</h1>
+            <p class="subtitle">Visualize different CPU scheduling algorithms</p>
+        </header>
         
-        <div class="input-section">
+        <div class="card input-section">
             <div class="algorithm-selection">
-                <label for="algorithm">Select Algorithm:</label>
-                <select id="algorithm">
-                    <option value="fcfs">First Come First Serve (FCFS)</option>
-                    <option value="sjf">Shortest Job First (SJF)</option>
-                    <option value="priority">Priority Scheduling</option>
-                    <option value="rr">Round Robin</option>
-                </select>
-                <div id="quantum-input" style="display: none;">
+                <h2>Algorithm Selection</h2>
+                <div class="select-wrapper">
+                    <select id="algorithm" class="styled-select">
+                        <option value="fcfs">First Come First Serve (FCFS)</option>
+                        <option value="sjf">Shortest Job First (SJF)</option>
+                        <option value="priority">Priority Scheduling (Preemptive)</option>
+                        <option value="rr">Round Robin</option>
+                    </select>
+                </div>
+                <div id="quantum-input" class="quantum-input" style="display: none;">
                     <label for="time-quantum">Time Quantum:</label>
-                    <input type="number" id="time-quantum" min="1" value="2">
+                    <input type="number" id="time-quantum" min="1" value="2" class="styled-input">
                 </div>
             </div>
 
             <div class="process-input">
-                <h3>Add Process</h3>
+                <h2>Process Details</h2>
                 <div class="input-group">
-                    <input type="text" id="process-id" placeholder="Process ID">
-                    <input type="number" id="arrival-time" placeholder="Arrival Time">
-                    <input type="number" id="burst-time" placeholder="Burst Time">
-                    <input type="number" id="priority" placeholder="Priority">
-                    <button onclick="addProcess()">Add Process</button>
+                    <div class="input-field">
+                        <label for="process-id">Process ID</label>
+                        <input type="text" id="process-id" class="styled-input" placeholder="e.g., P1">
+                    </div>
+                    <div class="input-field">
+                        <label for="arrival-time">Arrival Time</label>
+                        <input type="number" id="arrival-time" class="styled-input" placeholder="0" min="0">
+                    </div>
+                    <div class="input-field">
+                        <label for="burst-time">Burst Time</label>
+                        <input type="number" id="burst-time" class="styled-input" placeholder="1" min="1">
+                    </div>
+                    <div class="input-field">
+                        <label for="priority">Priority</label>
+                        <input type="number" id="priority" class="styled-input" placeholder="1" min="1">
+                        <small class="input-hint">Higher number = Higher priority</small>
+                    </div>
+                    <button onclick="addProcess()" class="btn btn-add">Add Process</button>
                 </div>
             </div>
 
-            <table id="process-table">
-                <thead>
-                    <tr>
-                        <th>Process ID</th>
-                        <th>Arrival Time</th>
-                        <th>Burst Time</th>
-                        <th>Priority</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="process-list">
-                </tbody>
-            </table>
+            <div class="process-table-container">
+                <h2>Process Queue</h2>
+                <div class="table-wrapper">
+                    <table id="process-table">
+                        <thead>
+                            <tr>
+                                <th>Process ID</th>
+                                <th>Arrival Time</th>
+                                <th>Burst Time</th>
+                                <th>Priority</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="process-list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-            <button id="simulate" onclick="simulate()">Simulate</button>
+            <button id="simulate" onclick="simulate()" class="btn btn-simulate">Simulate</button>
         </div>
 
-        <div class="output-section">
+        <div class="card output-section">
             <div class="gantt-chart">
-                <h3>Gantt Chart</h3>
-                <div id="gantt-container"></div>
-                <div id="timeline"></div>
+                <h2>Gantt Chart</h2>
+                <div class="gantt-wrapper">
+                    <div id="gantt-container"></div>
+                    <div id="timeline"></div>
+                </div>
             </div>
 
             <div class="results">
-                <h3>Results</h3>
-                <p>Average Waiting Time: <span id="avg-waiting-time">0</span> ms</p>
-                <p>Average Turnaround Time: <span id="avg-turnaround-time">0</span> ms</p>
+                <h2>Results</h2>
+                <div class="metrics">
+                    <div class="metric-card">
+                        <span class="metric-label">Average Waiting Time</span>
+                        <span class="metric-value"><span id="avg-waiting-time">0</span> ms</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Average Turnaround Time</span>
+                        <span class="metric-value"><span id="avg-turnaround-time">0</span> ms</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
