@@ -26,3 +26,8 @@ CSS – For styling and layout adjustments.
 JavaScript – For handling logic, user interactions, and scheduling algorithms.
 
 Chart.js – For visualizing the Gantt chart and other graphical representations.
+
+## Interface of the Project.
+
+![Screenshot 2025-03-30 183524](https://github.com/user-attachments/assets/a6f4043d-208a-4545-a775-0259e9256f70)
+
